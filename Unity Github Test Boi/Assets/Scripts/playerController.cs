@@ -11,6 +11,8 @@ public class playerController : MonoBehaviour
     public float rotationSpeed;
     float horizAxis;
     float vertAxis;
+    bool isOnGround;
+    public float jumpHeight;
     
     
 
@@ -18,8 +20,7 @@ public class playerController : MonoBehaviour
     void Start()
     {
         playerRB = player.GetComponent<Rigidbody>();
-        
-
+        isOnGround = false;
     }
 
     // Update is called once per frame
@@ -29,13 +30,31 @@ public class playerController : MonoBehaviour
         horizAxis = Input.GetAxis("Horizontal");
         vertAxis = Input.GetAxis("Vertical");
 
-        player.transform.Translate(Vector3.forward * moveSpeed * vertAxis * Time.deltaTime);
-        player.transform.Rotate(Vector3.up * rotationSpeed * horizAxis * Time.deltaTime);    
-
-        if(player.transform.rotation.x > 90 || player.transform.rotation.x < 0)
+        /*if (isOnGround)
         {
-            Debug.Log("Yes");
-        }    
+            player.transform.Translate(Vector3.forward * moveSpeed * vertAxis * Time.deltaTime);
+            player.transform.Rotate(Vector3.up * rotationSpeed * horizAxis * Time.deltaTime);  
+        }*/
+
+        player.transform.Translate(Vector3.forward * moveSpeed * vertAxis * Time.deltaTime);
+        player.transform.Rotate(Vector3.up * rotationSpeed * horizAxis * Time.deltaTime);
+
+        if(Input.GetKeyDown(KeyCode.Space) && isOnGround)
+        {
+            playerRB.AddForce(transform.up * jumpHeight, ForceMode.Impulse);
+        }   
+
+         
         
+    }
+
+    void OnCollisionEnter()
+    {
+        isOnGround = true;
+    }
+
+    void OnCollisionExit()
+    {
+        isOnGround = false;
     }
 }
