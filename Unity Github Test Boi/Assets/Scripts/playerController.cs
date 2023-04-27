@@ -7,8 +7,9 @@ public class playerController : MonoBehaviour
     //variables
     public GameObject player;
     Rigidbody playerRB;
-    public float moveSpeed;
+    public float moveSpeed = 10.0f;
     public float rotationSpeed;
+    public float boostMulti = 2;
     float horizAxis;
     float vertAxis;
     bool isOnGround;
@@ -30,14 +31,19 @@ public class playerController : MonoBehaviour
         horizAxis = Input.GetAxis("Horizontal");
         vertAxis = Input.GetAxis("Vertical");
 
-        /*if (isOnGround)
+        if (Input.GetKey(KeyCode.LeftShift) && isOnGround)
         {
-            player.transform.Translate(Vector3.forward * moveSpeed * vertAxis * Time.deltaTime);
-            player.transform.Rotate(Vector3.up * rotationSpeed * horizAxis * Time.deltaTime);  
-        }*/
+            moveSpeed = 25.0f;
+        }
+        else
+        {
+            moveSpeed = 10.0f;
+        }
+        
 
         player.transform.Translate(Vector3.forward * moveSpeed * vertAxis * Time.deltaTime);
         player.transform.Rotate(Vector3.up * rotationSpeed * horizAxis * Time.deltaTime);
+        
 
         if(Input.GetKeyDown(KeyCode.Space) && isOnGround)
         {
