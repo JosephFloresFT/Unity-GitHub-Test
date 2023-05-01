@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public Button startButton;
     public Button quitButton;
     public Canvas mainCanvas;
+    public Canvas loadingScreen;
     public bool activeMenu;
     public GameObject pauseMenuPanel;
 
@@ -24,6 +25,7 @@ public class GameManager : MonoBehaviour
 
     void StartGame()
     {
+        loadingScreen.gameObject.SetActive(true);
         SceneManager.LoadScene("MainScene");
         mainCanvas.gameObject.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;
