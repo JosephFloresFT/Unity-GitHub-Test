@@ -10,28 +10,38 @@ public class MenuManager : MonoBehaviour
     //variables
     bool menuActive;
     public Canvas pauseMenuCanvas;
+    public Button resumeButton;
+    public Button mainMenuButton;
+    private ThirdPersonCamera cam;
+    public Canvas loadingScreen;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        Cursor.lockState = CursorLockMode.Locked;
         menuActive = false;
         Debug.Log(menuActive);
+        cam = GameObject.Find("Main Camera").GetComponent<ThirdPersonCamera>();
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && menuActive == false)
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            pauseMenu();
+            if (menuActive == false)
+            {
+                pauseMenu();
+            }
         }
 
-        if (Input.GetKeyDown(KeyCode.Escape) && menuActive == true)
+        if (menuActive)
         {
-            exitMenu();
+            resumeButton.onClick.AddListener(exitMenu);
+            mainMenuButton.onClick.AddListener(loadTitleScreen);
         }
-        //Debug.Log(menuActive);
     }
 
     void pauseMenu()
@@ -40,6 +50,7 @@ public class MenuManager : MonoBehaviour
         pauseMenuCanvas.gameObject.SetActive(true);
         menuActive = true;
         Debug.Log("Paused");
+        cam.enabled = false;
     }
 
     void exitMenu()
@@ -48,5 +59,12 @@ public class MenuManager : MonoBehaviour
         pauseMenuCanvas.gameObject.SetActive(false);
         menuActive = false;
         Debug.Log("Play");
+        cam.enabled = true;
+    }
+
+    void loadTitleScreen()
+    {
+        loadingScreen.gameObject.SetActive(true);
+        SceneManager.LoadScene("TitleScreen");
     }
 }
