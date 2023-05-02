@@ -10,7 +10,11 @@ TerrainLayer:
   m_DiffuseTexture: {fileID: 2800000, guid: 9234305f12ded3442b911c3ff978d340, type: 3}
   m_NormalMapTexture: {fileID: 0}
   m_MaskMapTexture: {fileID: 0}
+<<<<<<< Updated upstream:Unity Github Test Boi/Assets/Textures/Textures/Handpainted_Grass_and_Ground_Textures/Demo/terrain_layers/Grass_darked_down.terrainlayer
   m_TileSize: {x: 5, y: 5}
+=======
+  m_TileSize: {x: 100, y: 100}
+>>>>>>> Stashed changes:Unity Github Test Boi/Assets/Text & Textures/Textures/Grass.terrainlayer
   m_TileOffset: {x: 0, y: 0}
   m_Specular: {r: 0, g: 0, b: 0, a: 0}
   m_Metallic: 0
